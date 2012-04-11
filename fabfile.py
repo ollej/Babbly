@@ -2,11 +2,11 @@ from fabric.api import *
 from fabric.contrib.console import confirm
 
 deploy_dir='/home/jxdevelopment/public_html/scripts/babbly'
-repo_dir='~/repos/babbly'
+repo_dir='/home/jxdevelopment/repos/Babbly'
 
 def update():
     # update to latest code from repo
-    local('git pull master') 
+    local('git pull') 
 
 def test():
     #local('./manage.py test my_app', capture=True)
@@ -26,9 +26,12 @@ def prepare_deploy():
     compile()
     pack()
 
+def deploy_remote():
+    with cd(deploy_dir):
+        run('tar xzf /tmp/babbly_latest.tgz --strip-components=1')
+
 def deploy():
     with lcd(deploy_dir):
         local('tar xzf /tmp/babbly_latest.tgz --strip-components=1')
     # tweet about release
     # upload tar ball to github
-        
