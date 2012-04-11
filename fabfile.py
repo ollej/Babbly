@@ -27,6 +27,7 @@ def prepare_deploy():
     pack()
 
 def deploy_remote():
+    put('/tmp/babbly_latest.tgz', '/tmp/')
     with cd(deploy_dir):
         run('tar xzf /tmp/babbly_latest.tgz --strip-components=1')
 
